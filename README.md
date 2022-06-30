@@ -1,7 +1,7 @@
 # javaNpython
 
 java와 python 공부하는 곳
-20220627
+(web부분도 조금...)
 
 ## 초기설정
 git config --global user.email "you@example.com"
