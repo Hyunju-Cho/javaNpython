@@ -17,7 +17,7 @@ public class quiz {
 		int big, diff;
 
 		if (num1 > num2) {
-			big = num1;
+			big = num1; 
 			System.out.println("큰 수 : " + big);
 			diff = num1 - num2;
 			System.out.println("절댓값 : " + diff);
