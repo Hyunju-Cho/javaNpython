@@ -5,8 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        div{
+            border-radius: 10px 0 0 20px;
+            color: white;
+            padding: 20px;
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+            overflow: hidden;
+            transition-duration: 2s;
+        }
+        input:checked +div{
+            background-color: beige;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>checkbox 체크 태그 스타일 변경</h1>
+    <input type="checkbox">
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quo dicta ea nihil quia accusamus nobis laborum perspiciatis iste? Quod qui adipisci temporibus tenetur quia reprehenderit dolore atque dignissimos blanditiis.</div>
+
 </body>
 </html>
