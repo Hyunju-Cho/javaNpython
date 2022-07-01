@@ -23,8 +23,8 @@ def ex05():
     st[0],st[5]=st[5],st[0]
     print(st)
 
-#ex01()
-#ex02()
-#ex03()
-#ex04()
+ex01()
+ex02()
+ex03()
+ex04()
 ex05()

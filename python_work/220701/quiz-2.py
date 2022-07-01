@@ -28,9 +28,9 @@ def ex06():
     nt=st[1::2]
     print(nt)
 
-#ex01()
-#ex02()
-#ex03()
-#ex04()
-#ex05()
+ex01()
+ex02()
+ex03()
+ex04()
+ex05()
 ex06()
