@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <style>
+        p{counter-increment: rint;}
+        p::before{content: counter(rint) ".";background-color: red;padding-right: 50px;}
+        p::after{content: attr(data)"page";color: blue;background-color: green;margin-left: 50px;}
+        p::first-letter{font-size: 3em;}
+    </style>
+    <script>
+        $(document).ready(function(){
+            console.log($('p').attr('data'))
+        })
+    </script>
+</head>
+<body>
+    <h1>head</h1>
+    <p data="53">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, laboriosam maiores veritatis veniam, vero iste atque nesciunt delectus harum voluptas ea consequatur temporibus, tenetur quas! At unde voluptas autem placeat.</p>
+    <p data="277">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse nulla reprehenderit tenetur quod excepturi, quam inventore alias cum molestiae, optio dignissimos repudiandae cupiditate eligendi velit id fugiat. Sunt, magnam aliquam!</p>
+</body>
+</html>
