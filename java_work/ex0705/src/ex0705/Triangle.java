@@ -1,6 +1,8 @@
 package ex0705;
 
 public class Triangle {
+	
+	//alt+shift+s->r getter setter 만들 수 있음
 
 	int under;
 	int height;
