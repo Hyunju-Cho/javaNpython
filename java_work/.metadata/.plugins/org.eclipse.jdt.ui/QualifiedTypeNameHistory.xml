@@ -13,4 +13,6 @@
     <fullyQualifiedTypeName name="zoo.Dog"/>
     <fullyQualifiedTypeName name="zoo.Duck"/>
     <fullyQualifiedTypeName name="zoo.Cat"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
 </qualifiedTypeNameHistroy>
