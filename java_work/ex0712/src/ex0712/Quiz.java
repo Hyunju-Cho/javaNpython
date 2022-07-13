@@ -4,7 +4,7 @@ public class Quiz {
 
 	public static void main(String[] args) {
 
-		final int[] ar= {3,5,1,4,6,7};
+		int[] ar= {3,5,1,4,6,7};
 		System.out.println("최댓값 = "+maxValue(ar));
 		System.out.println("최솟값 = "+minValue(ar));
 	}
@@ -12,7 +12,7 @@ public class Quiz {
 	public static int minValue(int[] arr) {
 		
 		int min=arr[0];
-		for(int i=0;i<arr.length-1;i++) {
+		for(int i=0;i<arr.length;i++) {
 			if(min>arr[i]) {
 				min=arr[i];
 			}
