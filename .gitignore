@@ -3,3 +3,5 @@ java_work/.metadata/*
 .log
 a1/
 aa
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
