@@ -18,6 +18,7 @@ element=web.find_element(By.CSS_SELECTOR,'.ad_section .lst_type .lst.type_more .
 element.click()
 time.sleep(4)
 
+#현재 마지막 탭으로 이동
 web.switch_to.window(web.window_handles[-1])
 
 inputelement=web.find_element(By.CSS_SELECTOR,'.airSearchWrap .airSearchForm .filterWrap .schForm .flightDes .rowEl input')
@@ -39,7 +40,19 @@ for i in listelement:
         i.click()
         break
 
-
+time.sleep(3)
+listelement=web.find_elements(By.CSS_SELECTOR,'.calBox .calendar td button .day')
+for i in listelement:
+    print(i.text)
+    if i.text=='15':
+        i.click()
+        time.sleep(1)
+        i.click()
+        time.sleep(1)
+    if i.text=='20':
+        i.click()
+        time.sleep(2)
+        break
 
 time.sleep(3)
 web.quit()
