@@ -1,9 +1,11 @@
 from io import BytesIO
+from tkinter import CURRENT
 from flask import Flask, render_template, send_file
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+import pymysql
 
 app = Flask(__name__, template_folder="templates")
 
@@ -21,8 +23,19 @@ def index():
     aa = "aaa 입니다"
     return render_template("index1.html", key1=aa)
 
+#insert 링크 클릭할 때마다 값이 DB로 전송됨
+@app.route("/insert")
+def insert():
+    con=pymysql.connect(host="localhost",user="root",passwd="1234",database="test",charset="utf8")
+    cur=con.cursor()
 
-@app.route("/img/<aa>") #예시: http://127.0.0.1:5000/img/50
+    cur.execute("INSERT INTO fish (name,length,weight) values ('bream',45,650);")
+    con.commit()
+    con.close()
+
+    return "aa"
+
+@app.route("/img/<int:aa>") #예시: http://127.0.0.1:5000/img/50
 def imgdown(aa):
     print(aa)
     img = BytesIO() #객체 내에 저장된 bytes 정보를 불러와 이미지로 읽어줌
