@@ -29,7 +29,7 @@ def insert():
     con=pymysql.connect(host="localhost",user="root",passwd="1234",database="test",charset="utf8")
     cur=con.cursor()
 
-    cur.execute("INSERT INTO fish (name,length,weight) values ('bream',45,650);")
+    cur.execute("INSERT INTO fish (name,length,weight) values ('smelt',45,650);")
     con.commit()
     con.close()
 
