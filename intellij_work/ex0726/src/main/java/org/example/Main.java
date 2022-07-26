@@ -25,10 +25,12 @@ public class Main {
                 String cmd = br.readLine();
                 if(cmd.equalsIgnoreCase("list")){
                     //리스트 출력
+                    //memberservice(list)->memberdao(selectAll)
                     listCommand();
                 }
                 else if(cmd.startsWith("new ")){
                     //리스트 입력
+                    //memberservice(regist)->memberdao(insert)
                 }
                 else if(cmd.equalsIgnoreCase("exit")){
                     System.out.println("종료합니다.");
