@@ -14,6 +14,15 @@ public class Main {
         memberService.list();
     }
 
+    public static void newCommand(MemberDto dto) {
+        MemberService memberService = acac.getBean(MemberService.class);
+        try {
+            memberService.regist(dto);
+        } catch (Exception e) {
+            System.out.println("email 중복됨....넣을 수 없음...");
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,16 +30,24 @@ public class Main {
 
         try {
             while (true) {
-                System.out.println("1. list or 2. new aa@naver.com 3. exit");
+                System.out.println("1. list or 2. new 3. exit");
                 String cmd = br.readLine();
                 if(cmd.equalsIgnoreCase("list")){
                     //리스트 출력
-                    //memberservice(list)->memberdao(selectAll)
                     listCommand();
                 }
-                else if(cmd.startsWith("new ")){
+                else if(cmd.startsWith("new")){
                     //리스트 입력
-                    //memberservice(regist)->memberdao(insert)
+                    try{
+                        String email=cmd.split(" ")[1];
+                        String name=cmd.split(" ")[2];
+                        String pwd=cmd.split(" ")[3];
+                        MemberDto md=new MemberDto(name,email,pwd);
+                        newCommand(md);
+                    }catch (Exception e){
+                        System.out.println("new 이메일 이름 비밀번호 \n이렇게 입력하세요");
+                    }
+
                 }
                 else if(cmd.equalsIgnoreCase("exit")){
                     System.out.println("종료합니다.");
@@ -43,14 +60,5 @@ public class Main {
         finally {
             acac.close();
         }
-
-//        MemberDao dao = acac.getBean(MemberDao.class);
-//
-//        dao.selectAll();//출력값 없음
-//        dao.insert(new MemberDto("홍길동","aaa@naver.com","1234"));//데이터 입력
-//        dao.selectAll();//입력된 데이터 출력
-//        dao.insert(new MemberDto("박길동","bbb@naver.com","1234"));
-//        dao.selectAll();
-
     }
 }

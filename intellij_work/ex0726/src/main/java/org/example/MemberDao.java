@@ -9,6 +9,7 @@ public class MemberDao {
 
     public void selectAll() {
         //System.out.println(data);
+        System.out.println(this);
         System.out.println("[data 출력 시작]");
         if(data.size()==0)
             System.out.println("data 내용 없음");
@@ -17,6 +18,17 @@ public class MemberDao {
     }
 
     public void insert(MemberDto dto) {
+        System.out.println(this);
         data.put(dto.getEmail(),dto);
+    }
+
+    public String getSelectByEmail(String email) {
+        System.out.println(this);
+        MemberDto dto=data.get(email);
+        if(dto!=null)
+            return "exist";
+        else
+            return "not exist";
+
     }
 }

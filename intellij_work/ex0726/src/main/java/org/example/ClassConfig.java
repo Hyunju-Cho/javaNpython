@@ -1,17 +1,19 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 //환경설정
 @Configuration
+@Import(ImportConfig.class)
 public class ClassConfig {
 
-    //객체 생성(스프링 컨테이너 안에 넣음)
-    @Bean
-    public MemberDao memberDao(){
-        return new MemberDao();
-    }
+    @Autowired
+    private MemberDao memberDao;
+    @Autowired
+    private MemberPrinter memberPrinter;
 
     //생성자에 의한 DI방식
 //    @Bean
@@ -23,7 +25,9 @@ public class ClassConfig {
     @Bean
     public MemberService memberService(){
         MemberService ms = new MemberService();
-        ms.setMemberDao(memberDao());
+        ms.setMemberDao(memberDao);
+        ms.setMemberPrinter(memberPrinter);
         return ms;
     }
+
 }
