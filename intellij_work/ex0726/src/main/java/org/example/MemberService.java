@@ -1,23 +1,24 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class MemberService {
 
+    @Autowired
     private MemberDao memberDao;
+    @Autowired
     private MemberPrinter memberPrinter;
-    public MemberService(){}
 
-    public MemberService(MemberDao memberDao) {
-        this.memberDao = memberDao;
-    }
-
-    public void setMemberPrinter(MemberPrinter memberPrinter) {
-        this.memberPrinter = memberPrinter;
-    }
-
-    public void setMemberDao(MemberDao memberDao) {
-        this.memberDao = memberDao;
-    }
-
+//    public MemberService(){}
+//    public MemberService(MemberDao memberDao) {
+//        this.memberDao = memberDao;
+//    }
+//    public void setMemberPrinter(MemberPrinter memberPrinter) {
+//        this.memberPrinter = memberPrinter;
+//    }
+//    public void setMemberDao(MemberDao memberDao) {
+//        this.memberDao = memberDao;
+//    }
 
     public void list() {
         memberDao.selectAll();
@@ -34,5 +35,9 @@ public class MemberService {
             throw new Exception();
         else
             memberDao.insert(dto);
+    }
+
+    public void update(String email, String oldpwd, String newpwd) {
+        memberDao.update(email,oldpwd,newpwd);
     }
 }

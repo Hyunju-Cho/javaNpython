@@ -23,6 +23,11 @@ public class Main {
         }
     }
 
+    private static void updatecommand(String email, String oldpwd, String newpwd) {
+        MemberService memberService = acac.getBean(MemberService.class);
+        memberService.update(email,oldpwd,newpwd);
+    }
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +35,7 @@ public class Main {
 
         try {
             while (true) {
-                System.out.println("1. list or 2. new 3. exit");
+                System.out.println("1. list or 2. new 3. update 4. exit");
                 String cmd = br.readLine();
                 if(cmd.equalsIgnoreCase("list")){
                     //리스트 출력
@@ -49,6 +54,18 @@ public class Main {
                     }
 
                 }
+                else if(cmd.startsWith("update ")){
+                    //update aa@naver.com 1234 5678
+                    try {
+                        String email=cmd.split(" ")[1];
+                        String oldpwd=cmd.split(" ")[2];
+                        String newpwd=cmd.split(" ")[3];
+                        updatecommand(email,oldpwd,newpwd);
+                    }catch (Exception e){
+                        System.out.println("update aa@naver.com 1234 1234\n 이렇게 입력하세요");
+                        System.out.println(e.toString());
+                    }
+                }
                 else if(cmd.equalsIgnoreCase("exit")){
                     System.out.println("종료합니다.");
                     break;
@@ -61,4 +78,6 @@ public class Main {
             acac.close();
         }
     }
+
+
 }
