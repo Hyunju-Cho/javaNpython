@@ -1,18 +1,5 @@
 INDEX VERSION 1.131+D:\mhgit\spring_work\.metadata\.plugins\org.eclipse.jdt.core
-3513223607.index
-605698660.index
-244766080.index
-3295555639.index
-2726785889.index
-4196067820.index
-1129560837.index
-3967821442.index
-3625851646.index
-34033057.index
-3654986800.index
-1538594579.index
-4008278575.index
-2653062674.index
-768281748.index
 1865797976.index
-3158905626.index
+624968352.index
+326772696.index
+2726785889.index
