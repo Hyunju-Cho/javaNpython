@@ -1,6 +1,11 @@
 package com.dip.myapp.config;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +14,24 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 @ComponentScan(basePackages = {"com.dip.myapp.member"})
 public class Memberconfig {
-
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
+		ssfb.setDataSource(datasource());
+		ssfb.setMapperLocations(applicationContext.getResources("classpath:/*Mapper.xml"));
+		return ssfb.getObject();
+	}
+	
+	@Bean
+	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+		SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+		return sqlSessionTemplate;
+	}
+	
 	@Bean
 	public DataSource datasource() {
 		DataSource ds = new DataSource();
