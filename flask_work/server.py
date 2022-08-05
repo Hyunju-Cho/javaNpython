@@ -1,13 +1,13 @@
-from wsgiref.util import request_uri
 from flask import Flask, render_template, request
+from filetuils import myfile
 import pymysql
-from zmq import REQ
 from ml.knclf import MyKNclf
 import cv2
 import numpy as np
 from sklearn.neighbors import KNeighborsRegressor
 
 app = Flask(__name__)
+app.register_blueprint(myfile.app)
 kclf = MyKNclf().getModel()
 
 @app.route("/")
@@ -51,6 +51,10 @@ def memberform():
 def test():
     pred1 = 'x0과 x1을 입력하셔야 합니다.'
     pred2 = '파일을 업로드 하셔야 합니다.'
+    knre=""
+    kcl=""
+    x1=4
+    x2=5
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -66,19 +70,17 @@ def test():
                 [9, 10],
                 [6, 12]
             ])
-            x_test = np.array([
-                [9, 2],
-                [6, 10],
-                [2, 4]
-            ])
+
             y_train = np.array([3, 5, 7, 10, 12, 7, 13, 13, 12])
-            y_test = np.array([13, 12, 6])
 
             knr = KNeighborsRegressor(n_neighbors=3)
             knr.fit(x_train, y_train)
             x, y = int(request.form['x0']), int(request.form['x1'])
+            x1=x
+            x2=y
             pred1 = knr.predict([[x, y]])
             pred1 = f'예측하신 타겟값은 = {pred1} 입니다'
+            knre="show"
         except Exception as e:
             print(e)
             pred1 = e
@@ -88,10 +90,11 @@ def test():
             data = cv2.imread('upload.png', cv2.IMREAD_GRAYSCALE)
             pred2 = kclf.predict(data.reshape(-1, 25))
             pred2 = f'업로드하신 파일의 타겟값은 {pred2}입니다.'
+            kcl="show"
         except Exception as e:
             print(e)
             pred2 = e
-    return render_template("KNeighbors.html", pred1=pred1, pred2=pred2)
+    return render_template("KNeighbors.html", pred1=pred1, pred2=pred2,knre=knre,kcl=kcl,x1=x1,x2=x2)
 
 if __name__ == '__main__':
     app.run(debug=True)
