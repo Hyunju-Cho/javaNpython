@@ -1,0 +1,17 @@
+from tokenize import _all_string_prefixes
+import numpy as np
+
+a=np.arange(4)
+b=np.arange(8)
+
+print(a)
+print(b)
+
+c=np.concatenate([a,b],axis=0)
+print(c)
+
+a=a.reshape(-1,4)
+b=b.reshape(-1,8)
+
+print(a)
+print(b)
