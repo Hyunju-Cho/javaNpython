@@ -19,6 +19,7 @@ def index():
             f.save('temp.png')
             img = load_img('temp.png', target_size=(150, 150))
 
+
             x = img_to_array(img)
             x = np.expand_dims(x, axis=0)
             images = np.vstack([x])
