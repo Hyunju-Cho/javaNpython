@@ -2,6 +2,7 @@ from flask import Flask,request,render_template,send_file
 import pandas as pd
 from io import BytesIO
 import matplotlib.pyplot as plt
+import re
 
 app=Flask(__name__)
 
@@ -20,7 +21,7 @@ columns = ['생산관리분야','공정관리','품질경영','품질관리','�
  '철도분야' ,'철도차량', '조선분야', '조선' ,'선박기계1급', '항공분야', '항공' ,'자동차분야', '그린전동자동차',
  '그린전동자동차기사', '자동차정비' ,'자동차검사', '금형.공작기계분야' ,'사출금형설계', '프레스금형설계' ,'금속.재료분야',
  '금속1급', '금속(재료분야)', '금속(제련분야)', '금속(가공분야)', '금속', '금속재료', '세라믹' ,'용접분야', '용접',
- '화공분야', '화공' '공업화학' '화약류제조' '화학분석' '바이오화학제품제조' '생물공학' '섬유분야' '섬유1급' '방직'
+ '화공분야', '화공', '공업화학', '화약류제조', '화학분석', '바이오화학제품제조', '생물공학', '섬유분야', '섬유1급', '방직',
  '섬유기계', '염색가공' ,'방사' ,'섬유물리', '섬유화학', '섬유' ,'생사' ,'의류' ,'전기분야' ,'전기' ,'전기공사', '철도신호',
  '전기철도', '전자분야' ,'임베디드', '전자', '반도체설계' ,'의공' '로봇기구개발', '로봇소프트웨어개발' ,'로봇하드웨어개발',
  '전자계산기' ,'광학', '공업계측제어' ,'정보기술분야', '정보처리' ,'전자계산기조직응용', '빅데이터분석' ,'정보보안',
@@ -39,29 +40,39 @@ columns = ['생산관리분야','공정관리','품질경영','품질관리','�
 def pltmake(names):
     x=[]
     y=[]
+    names=re.split(',',names)
+    print('pltmake',names)
     for name in names:
-        print('pltmake',name)
-        rowsdata=data[data['종목명']==name]
-        x.append(name)
-        y.append(rowsdata.iloc[0,-1])
+        if len(name)>0:
+          rowsdata=data[data['종목명']==name]
+          try:
+            x.append(name)
+            y.append(rowsdata.iloc[0,-1])
+          except:
+            pass
     return x,y
 
 @app.route("/",methods=['GET','POST'])
 def index():
     linenames=['전기공사','가스','전자계산기','신재생에너지발전설비(태양광)','빅데이터분석','정보보안']
+    eno_names=""
     if request.method=='POST':
         linenames=request.form.getlist('xitem')            
-    return render_template("index.html",table_data=table_data,columns=columns,linenames=linenames)
+        for name in linenames:
+            eno_names=eno_names+name+","
+    else:
+        eno_names='전기공사,가스,전자계산기,신재생에너지발전설비(태양광),빅데이터분석,정보보안'
+    return render_template("index.html",table_data=table_data,columns=columns,linenames=eno_names)
 
 @app.route("/gra/<linenames>")
 def gra(linenames):
     x,y=pltmake(linenames)
 
+    plt.figure(figsize=(13,5))
     plt.rc('font', family='Malgun Gothic')
     plt.bar(x,y,color=['red','green','yellow','blue','gray'],label='한글')
     plt.xlabel('자격증명')
     plt.ylabel('누적취득자수')
-    plt.show()
 
     img = BytesIO()
     plt.savefig(img,format="png",dpi=100)

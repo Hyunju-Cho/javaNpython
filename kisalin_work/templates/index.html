@@ -78,14 +78,14 @@
             <img src="/gra/{{linenames}}">
         </div>
         <div>
-            <from method="post">
+            <form method="post">
                 <div class="m-3 p-3">
                     <input type="submit" value="graph" class="btn btn-primary">
                 </div>
                 {% for column in columns %}
-                {{column}} : <input type="checkbox" name="xitem" value="{{column}}">
+                    <span style="display: inline-block;" class="p-3 m-3">{{column}} <input type="checkbox" name="xitem" value="{{column}}"></span>
                 {% endfor %}
-            </from>
+            </form>
         </div>
     </div>
 </body>
